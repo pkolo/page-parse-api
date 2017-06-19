@@ -20,7 +20,7 @@ Displays all links and associated heading content in the database.
           tag: 'h1'
         }
       ]
-    }]```
+    }]
 
 * Error Response
   * Code: `422`
@@ -47,7 +47,7 @@ Takes a URL as a data parameter and, if the URL is valid, parses the page and cr
           tag: 'h1'
         }
       ]
-    }```
+    }
 
 
 * Error Response
