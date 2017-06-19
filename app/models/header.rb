@@ -3,4 +3,5 @@ class Header < ApplicationRecord
 
   validates :content, presence: true
   validates :tag, presence: true
+  validates_inclusion_of :tag, in: ["h1", "h2", "h3"]
 end
