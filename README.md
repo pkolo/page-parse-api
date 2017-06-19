@@ -1,24 +1,55 @@
-# README
+# Page Parse API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An API that, given a valid URL, will parse out content within `h1`, `h2`, and `h3` tags, and store it in a database.
 
-Things you may want to cover:
+## Show all links
+`GET /links`
 
-* Ruby version
+Displays all links and associated heading content in the database.
 
-* System dependencies
+* Success Response
+  * Code: `200`
+  * Content:
+  ```
+  [{
+      id: 1,
+      url: 'http://www.example.com',
+      headers: [
+        {
+          content: 'Example Domain',
+          tag: 'h1'
+        }
+      ]
+    }]```
 
-* Configuration
+* Error Response
+  * Code: `422`
 
-* Database creation
+## Create a new link
+`POST /links`
 
-* Database initialization
+Takes a URL as a data parameter and, if the URL is valid, parses the page and creates a new link and associated headers, then returns the newly-created link.
 
-* How to run the test suite
+* Data Params
+  * `url=[valid URL]`
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+* Success Response
+  * Code: `200`
+  * Content:
+  ```
+  {
+      id: 1,
+      url: 'http://www.example.com',
+      headers: [
+        {
+          content: 'Example Domain',
+          tag: 'h1'
+        }
+      ]
+    }```
 
-* ...
+
+* Error Response
+  * Code: `422`
+  * Content: `{ errors: ['Url can't be blank'] }`
