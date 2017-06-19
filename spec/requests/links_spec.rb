@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Links API', type: :request do
   # initialize test data
   let!(:links) { create_list(:link, 10) }
-  let(:link_id) { links.first.id }
 
   # Test suite for GET /links
   describe 'GET /links' do
@@ -18,6 +17,13 @@ RSpec.describe 'Links API', type: :request do
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
+    end
+
+    # Tests JSON formatting
+    it 'returns an array of objects with id and url' do
+      json = JSON.parse(response.body)
+      expect(json.first['id']).not_to be(nil)
+      expect(json.first['url']).not_to be(nil)
     end
   end
 
