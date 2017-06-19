@@ -14,7 +14,7 @@ class LinksController < ApplicationController
       parsed_body = Nokogiri::HTML(open(params['url']))
 
       parsed_body.css('h1', 'h2', 'h3').each do |element|
-        new_header = Header.new(content: element.text, tag: element.name)
+        new_header = Header.new(content: element.text.strip, tag: element.name)
         new_header.link = @link
         new_header.save
       end
@@ -24,5 +24,10 @@ class LinksController < ApplicationController
       render :json => {:errors => @link.errors.full_messages}, status: 422
     end
   end
+
+  private
+    def link_params
+      params.require(:link).permit(:url)
+    end
 
 end
