@@ -82,8 +82,10 @@ RSpec.describe 'Links API', type: :request do
 
     context 'when request is invalid' do
       let(:invalid_attributes) { {url: 'example.com'} }
+      before { post '/links', params: invalid_attributes }
 
       it 'returns status code 422' do
+        puts response
         expect(response).to have_http_status(422)
       end
     end
